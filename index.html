@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike MLB Collection - Replica</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #111111;
+        }
+
+        /* Top Announcement Bar */
+        .top-banner {
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 48px;
+            height: 60px;
+        }
+
+        .logo svg {
+            width: 60px;
+            height: 24px;
+            fill: #111;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #111;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 18px 0;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid #111;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-box {
+            background: #f5f5f5;
+            border-radius: 100px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 140px;
+        }
+
+        /* Category Header */
+        .category-header {
+            padding: 24px 48px 12px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .sort-options select {
+            border: none;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Main Container Layout */
+        .main-container {
+            display: flex;
+            padding: 0 48px 48px 48px;
+        }
+
+        /* Left Filter Sidebar */
+        .sidebar {
+            width: 240px;
+            padding-right: 24px;
+            flex-shrink: 0;
+            height: calc(100vh - 120px);
+            position: sticky;
+            top: 80px;
+            overflow-y: auto;
+        }
+
+        .filter-group {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 16px 0;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .filter-options {
+            list-style: none;
+        }
+
+        .filter-options li {
+            margin-bottom: 8px;
+        }
+
+        .filter-options label {
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-options input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #111;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        /* Product Card */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-image-wrapper {
+            width: 100%;
+            background-color: #f5f5f5;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-info {
+            padding-top: 12px;
+        }
+
+        .product-tag {
+            color: #9e3500;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .product-category {
+            color: #757575;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 960px) {
+            .sidebar {
+                display: none;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .navbar, .category-header, .main-container {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement -->
+    <div class="top-banner">
+        Members: Free Shipping on Orders $50+ | Join Us
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <svg viewBox="0 0 24 24"><path d="M21.71 3.29a1 1 0 0 0-1.05-.23l-18 7a1 1 0 0 0 .12 1.9l6.83 1.82 1.82 6.83a1 1 0 0 0 1.9.12l7-18a1 1 0 0 0-.62-1.44z"/></svg>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Kids</a></li>
+                <li><a href="#">Sale</a></li>
+            </ul>
+            <div class="user-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Category Title Bar -->
+    <div class="category-header">
+        <h1 class="category-title">MLB Gear (<span id="product-count">0</span>)</h1>
+        <div class="sort-options">
+            <span>Sort By:</span>
+            <select id="sort-select" onchange="sortProducts()">
+                <option value="featured">Featured</option>
+                <option value="low-high">Price: Low to High</option>
+                <option value="high-low">Price: High to Low</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Main Layout Area -->
+    <div class="main-container">
+        
+        <!-- Filter Sidebar -->
+        <aside class="sidebar">
+            <div class="filter-group">
+                <div class="filter-title">Gender</div>
+                <ul class="filter-options">
+                    <li><label><input type="checkbox" value="Men" onchange="filterProducts()"> Men</label></li>
+                    <li><label><input type="checkbox" value="Women" onchange="filterProducts()"> Women</label></li>
+                </ul>
+            </div>
+            <div class="filter-group">
+                <div class="filter-title">Teams</div>
+                <ul class="filter-options">
+                    <li><label><input type="checkbox" value="Dodgers" onchange="filterProducts()"> LA Dodgers</label></li>
+                    <li><label><input type="checkbox" value="Yankees" onchange="filterProducts()"> NY Yankees</label></li>
+                    <li><label><input type="checkbox" value="Braves" onchange="filterProducts()"> Atlanta Braves</label></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Product Grid Dynamic Area -->
+        <main class="products-grid" id="grid"></main>
+
+    </div>
+
+    <!-- Script for Dynamic Content & Logic -->
+    <script>
+        const productsData = [
+            {
+                id: 1,
+                tag: "Just In",
+                title: "Los Angeles Dodgers Postseason",
+                category: "Men's Nike Therma-FIT Hooded Pullover",
+                price: 90,
+                team: "Dodgers",
+                gender: "Men",
+                image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=500&q=80"
+            },
+            {
+                id: 2,
+                tag: "Best Seller",
+                title: "New York Yankees Authentic Collection",
+                category: "Men's Nike Authentic Jersey",
+                price: 430,
+                team: "Yankees",
+                gender: "Men",
+                image: "https://images.unsplash.com/photo-1511746315387-c4a76990fdce?w=500&q=80"
+            },
+            {
+                id: 3,
+                tag: "Just In",
+                title: "Atlanta Braves City Connect",
+                category: "Women's Nike MLB Stadium Jersey",
+                price: 200,
+                team: "Braves",
+                gender: "Women",
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80"
+            },
+            {
+                id: 4,
+                tag: "",
+                title: "Shohei Ohtani Dodgers Replica",
+                category: "Men's Nike Dri-FIT T-Shirt",
+                price: 45,
+                team: "Dodgers",
+                gender: "Men",
+                image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&q=80"
+            }
+        ];
+
+        let currentProducts = [...productsData];
+
+        function renderProducts(items) {
+            const grid = document.getElementById('grid');
+            document.getElementById('product-count').innerText = items.length;
+            
+            grid.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="${p.image}" alt="${p.title}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
+                        <div class="product-title">${p.title}</div>
+                        <div class="product-category">${p.category}</div>
+                        <div class="product-price">$${p.price}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts() {
+            const selectedCheckboxes = Array.from(document.querySelectorAll('.sidebar input:checked')).map(cb => cb.value);
+            
+            if (selectedCheckboxes.length === 0) {
+                currentProducts = [...productsData];
+            } else {
+                currentProducts = productsData.filter(p => 
+                    selectedCheckboxes.includes(p.gender) || selectedCheckboxes.includes(p.team)
+                );
+            }
+            sortProducts();
+        }
+
+        function sortProducts() {
+            const value = document.getElementById('sort-select').value;
+            if (value === 'low-high') {
+                currentProducts.sort((a, b) => a.price - b.price);
+            } else if (value === 'high-low') {
+                currentProducts.sort((a, b) => b.price - a.price);
+            }
+            renderProducts(currentProducts);
+        }
+
+        // Initial Load
+        renderProducts(currentProducts);
+    </script>
+</body>
+</html>
